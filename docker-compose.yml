@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  # ── Backend API ──
+  backend:
+    build: ./backend
+    container_name: styleai-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/styleai
+      - JWT_SECRET=styleai_super_secret_key_change_in_production
+      - JWT_EXPIRE=30d
+      - WEATHER_API_KEY=YOUR_OPENWEATHERMAP_API_KEY
+    volumes:
+      - uploads_data:/app/uploads
+    depends_on:
+      - mongo
+    restart: unless-stopped
+
+  # ── MongoDB ──
+  mongo:
+    image: mongo:7
+    container_name: styleai-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+
+volumes:
+  mongo_data:
+  uploads_data:
