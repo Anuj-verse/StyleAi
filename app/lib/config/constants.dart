@@ -3,7 +3,9 @@ class AppConstants {
   // Change this to your backend URL
   // For Linux Desktop/Web use: localhost or 127.0.0.1
   // For Android emulator use: 10.0.2.2
-  static const String baseUrl = 'http://127.0.0.1:3000/api';
+  static const String baseUrl = 'http://13.60.202.132:3000/api';
+
+  static const String serverUrl = 'http://13.60.202.132:3000'; // Base server for images
 
   // ── Storage Keys ──
   static const String tokenKey = 'auth_token';
