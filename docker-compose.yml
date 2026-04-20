@@ -7,15 +7,12 @@ services:
     container_name: styleai-backend
     ports:
       - "3000:3000"
-    environment:
-      - MONGODB_URI=mongodb://mongo:27017/styleai
-      - JWT_SECRET=styleai_super_secret_key_change_in_production
-      - JWT_EXPIRE=30d
-      - WEATHER_API_KEY=YOUR_OPENWEATHERMAP_API_KEY
+    # We load all variables directly from your backend/.env file
+    # This prevents accidentally leaking keys to GitHub inside docker-compose.yml
+    env_file:
+      - ./backend/.env
     volumes:
       - uploads_data:/app/uploads
-    depends_on:
-      - mongo
     restart: unless-stopped
 
   # ── MongoDB ──
